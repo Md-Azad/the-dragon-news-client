@@ -2,7 +2,6 @@ import logo from "../../../assets/logo.png";
 import moment from "moment";
 import Marquee from "react-fast-marquee";
 import { Button, Container } from "react-bootstrap";
-import { AuthCon } from "../../../Providers/AuthProvider";
 
 const Header = () => {
   return (

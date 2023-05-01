@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthCon } from "../../../Providers/AuthProvider";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthCon);
+  const navigate = useNavigate();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    loginUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Container className="w-25 mx-auto">
       <h3>Please Login</h3>
-      <Form>
+      <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
